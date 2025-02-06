@@ -1,13 +1,21 @@
 package com.jkdev.jobapp.job;
 
-public class Job {
+import jakarta.persistence.*;
 
+@Entity
+// @Table(name = "Jobs") // uses className as default if this annotation is omitted
+public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementing strategy
     private Long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    public Job() {
+    }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;
@@ -17,6 +25,7 @@ public class Job {
         this.maxSalary = maxSalary;
         this.location = location;
     }
+
 
     public String getLocation() {
         return location;
