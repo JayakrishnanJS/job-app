@@ -1,5 +1,6 @@
 package com.jkdev.jobapp.job;
 
+import com.jkdev.jobapp.company.Company;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class JobController {
     @PostMapping
     public ResponseEntity<String> addJob(@RequestBody Job job){
         jobService.addJob(job);
+        Company c = job.getCompany();
         return new ResponseEntity<>("Job added successfully", HttpStatus.OK);
     }
 
@@ -39,7 +41,7 @@ public class JobController {
         boolean deleted = jobService.deleteJobById(id);
         if(deleted)
             return new ResponseEntity<>("Job deleted successfully", HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Job not found",HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")
