@@ -2,6 +2,7 @@ package com.jkdev.jobapp.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jkdev.jobapp.job.Job;
+import com.jkdev.jobapp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,9 +15,21 @@ public class Company {
     private String name;
     private String description;
 
-    @JsonIgnore
+    @JsonIgnore // prevent - Infinite recursion occurring when both Company and Job reference each other during serialization
+    // Company should include list of jobs, but not vice versa
     @OneToMany(mappedBy = "company")
-    private List< Job> jobs;
+    private List<Job> jobs;
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public Company() {
 

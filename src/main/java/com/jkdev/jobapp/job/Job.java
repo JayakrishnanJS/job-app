@@ -26,7 +26,8 @@ public class Job {
         this.company = company;
     }
 
-    public Job() {
+    public Job() { // Java Reflection(jpa instantiates entities by reflection when it retrieves data from the database)
+                   // requires a no-argument constructor to create objects before setting their fields
     }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {

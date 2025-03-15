@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/companies")
 public class CompanyController {
 
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
@@ -23,7 +23,7 @@ public class CompanyController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCompany(@PathVariable long id, @RequestBody Company company) {
-        boolean updated = companyService.updateCompany(id, company);
+        boolean updated = companyService.updateCompany(company, id);
         if(updated)
             return new ResponseEntity<>("Company updated successfully", HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -37,7 +37,7 @@ public class CompanyController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCompanyById(@PathVariable long id) {
-        boolean deleted = companyService.deleteCompany(id);
+        boolean deleted = companyService. deleteCompany(id);
         if(deleted)
             return new ResponseEntity<>("Company deleted successfully", HttpStatus.OK);
         return new ResponseEntity<>("Company not found",HttpStatus.NOT_FOUND);
