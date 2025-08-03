@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/jobs")
 public class JobController {
     private JobService jobService;
-
+    // Constructor based Dependency Injection
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }

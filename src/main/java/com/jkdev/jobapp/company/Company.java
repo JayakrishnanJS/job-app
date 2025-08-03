@@ -16,7 +16,7 @@ public class Company {
     private String description;
 
     @JsonIgnore // prevent - Infinite recursion occurring when both Company and Job reference each other during serialization
-    // Company should include list of jobs, but not vice versa
+    // Company should include lst of jobs, but not vice versa
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
